@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  toolchain:
+    build:
+      context: toolchain
+      dockerfile: Dockerfile
+    #cap_add:
+    #- MKNOD
+
+    #security_opt:
+    #- seccomp:unconfined
+    privileged: true
+    
+    environment:
+    - TZ=Europe/Zurich
+    
+    volumes:
+      - ..:/workspace:cached
+      - buildroot:/buildroot
+      - buildroot2:/buildroot2
+      
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"  
+  
+volumes:
+  buildroot: {}
+  buildroot2: {}
+  

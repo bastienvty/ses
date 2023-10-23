@@ -1,0 +1,25 @@
+From 8f5c76f906cea29efd9fe7058e7b1349bab910d8 Mon Sep 17 00:00:00 2001
+From: Bastien Veuthey <veutheybastien@gmail.com>
+Date: Mon, 16 Oct 2023 14:00:23 +0200
+Subject: [PATCH] CONFIG_SYS_BOOTM_LEN 64MiB
+
+---
+ include/configs/sunxi-common.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index a6a48795..ca3b1f6c 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -32,7 +32,7 @@
+ #endif
+ 
+ #ifdef CONFIG_ARM64
+-#define CONFIG_SYS_BOOTM_LEN		(32 << 20)
++#define CONFIG_SYS_BOOTM_LEN		(64 << 20)
+ #endif
+ 
+ /* Serial & console */
+-- 
+2.38.1
+

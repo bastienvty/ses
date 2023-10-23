@@ -1,0 +1,47 @@
+/*
+ * U-Boot uImage source file containing a single kernel and FDT blob for SeS lesson
+ */
+
+/dts-v1/;
+
+/ {
+	description = "SeS image with single Linux kernel and FDT blob";
+	#address-cells = <1>;
+
+	images {
+		kernel {
+			description = "SeS Linux kernel";
+			data = /incbin/("./Image");
+			type = "kernel";
+			arch = "arm64";
+			os = "linux";
+			compression = "none";
+			load = <0x40080000>;
+			entry = <0x40080000>;
+			hash-1 {
+				algo = "sha512";
+			};
+		};
+		fdt-1 {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("./sun50i-h5-nanopi-neo-plus2.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x4FA00000>;
+			entry = <0x4FA00000>;
+			hash-1 {
+				algo = "sha512";
+			};
+		};
+	};
+
+	configurations {
+		default = "standard";
+		standard {
+			description = "Boot Linux kernel with FDT blob";
+			kernel = "kernel";
+			fdt = "fdt-1";
+		};
+	};
+};

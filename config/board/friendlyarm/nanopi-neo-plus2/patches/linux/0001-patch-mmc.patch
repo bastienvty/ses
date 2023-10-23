@@ -1,0 +1,29 @@
+From 32cf31daefe862f2c0a01f678173c00b1ddfd79d Mon Sep 17 00:00:00 2001
+From: Bastien Veuthey <veutheybastien@gmail.com>
+Date: Mon, 2 Oct 2023 18:33:57 +0200
+Subject: [PATCH] patch: mmc
+
+---
+ arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi
+index a56fae761..ce2632635 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h5.dtsi
+@@ -6,6 +6,12 @@
+ #include <dt-bindings/thermal/thermal.h>
+ 
+ / {
++	aliasaes {
++		mmc0 = &mmc0;
++		mmc1 = &mmc1;
++		mmc2 = &mmc2;
++	};
++
+ 	cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+-- 
+2.38.1
+

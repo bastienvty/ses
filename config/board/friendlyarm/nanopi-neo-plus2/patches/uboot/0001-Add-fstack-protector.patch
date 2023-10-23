@@ -1,0 +1,74 @@
+From 09825e9fc213828f28a0a12bb9fc2b3cedf17ee6 Mon Sep 17 00:00:00 2001
+From: Bastien Veuthey <veutheybastien@gmail.com>
+Date: Sun, 22 Oct 2023 17:39:44 +0200
+Subject: [PATCH] Add fstack-protector
+
+---
+ Makefile           |  2 +-
+ common/Makefile    |  3 +++
+ common/stackprot.c | 15 +++++++++++++++
+ config.mk          |  2 +-
+ 4 files changed, 20 insertions(+), 2 deletions(-)
+ create mode 100644 common/stackprot.c
+
+diff --git a/Makefile b/Makefile
+index dd98b430..02b5a20c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -677,7 +677,7 @@ else
+ KBUILD_CFLAGS	+= -O2
+ endif
+ 
+-KBUILD_CFLAGS += $(call cc-option,-fno-stack-protector)
++#KBUILD_CFLAGS += $(call cc-option,-fno-stack-protector)
+ KBUILD_CFLAGS += $(call cc-option,-fno-delete-null-pointer-checks)
+ 
+ # disable stringop warnings in gcc 8+
+diff --git a/common/Makefile b/common/Makefile
+index 2e7a0905..4ec43a0e 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -139,3 +139,6 @@ obj-$(CONFIG_CMD_LOADB) += xyzModem.o
+ obj-$(CONFIG_$(SPL_TPL_)YMODEM_SUPPORT) += xyzModem.o
+ 
+ obj-$(CONFIG_AVB_VERIFY) += avb_verify.o
++
++#stack protector add object
++obj-y += stackprot.o
+diff --git a/common/stackprot.c b/common/stackprot.c
+new file mode 100644
+index 00000000..7942fc07
+--- /dev/null
++++ b/common/stackprot.c
+@@ -0,0 +1,15 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ *  Copyright 2021 Broadcom
++ */
++#include <common.h>
++#include <asm/global_data.h>
++DECLARE_GLOBAL_DATA_PTR;
++unsigned long __stack_chk_guard = (unsigned long)(0xfeedf00ddeadbeef & ~0UL);
++void __stack_chk_fail(void)
++{
++	void *ra;
++	ra = __builtin_extract_return_addr(__builtin_return_address(0));
++	panic("Stack smashing detected in function:\n%p relocated from %p",
++	      ra, ra - gd->reloc_off);
++}
+diff --git a/config.mk b/config.mk
+index 7bb1fd4e..01d3dbec 100644
+--- a/config.mk
++++ b/config.mk
+@@ -11,7 +11,7 @@
+ #  That's the reason why this file must be included from spl/Makefile too.
+ #  If we did not have Tegra SoCs, build system would be much simpler...)
+ PLATFORM_RELFLAGS :=
+-PLATFORM_CPPFLAGS :=
++PLATFORM_CPPFLAGS := -fstack-protector-strong
+ KBUILD_LDFLAGS :=
+ LDFLAGS_FINAL :=
+ LDFLAGS_STANDALONE :=
+-- 
+2.38.1
+

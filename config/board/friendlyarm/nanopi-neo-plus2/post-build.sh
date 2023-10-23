@@ -1,6 +1,6 @@
 #!/bin/sh
 BOARD_DIR="$(dirname $0)"
-BUILDROOT_DIR="/buildroot2"
+BUILDROOT_DIR="/buildroot"
 IMAGES_DIR=$BUILDROOT_DIR/"output/images"
 
 #install -m 0644 -D $BOARD_DIR/extlinux.conf $BINARIES_DIR/extlinux/extlinux.conf

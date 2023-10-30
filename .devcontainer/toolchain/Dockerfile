@@ -45,7 +45,8 @@ RUN apt update && export DEBIAN_FRONTEND=noninteractive && yes | unminimize && a
     bzip2 \
     tree \
     bc   \
-    ruby 
+    ruby \
+    vim
 
 COPY scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*

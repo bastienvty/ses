@@ -1,0 +1,25 @@
+From 35d5e044c7c1aa37979138804dce93a8181e894b Mon Sep 17 00:00:00 2001
+From: Bastien Veuthey <veutheybastien@gmail.com>
+Date: Sat, 11 Nov 2023 11:29:33 +0100
+Subject: [PATCH] hide version
+
+---
+ version.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/version.h b/version.h
+index e5b1e71..8cbecda 100644
+--- a/version.h
++++ b/version.h
+@@ -1,6 +1,6 @@
+ /* $OpenBSD: version.h,v 1.98 2023/08/10 01:01:07 djm Exp $ */
+ 
+-#define SSH_VERSION	"OpenSSH_9.4"
++#define SSH_VERSION	"My_super_SecureShell"
+ 
+-#define SSH_PORTABLE	"p1"
++#define SSH_PORTABLE	"none"
+ #define SSH_RELEASE	SSH_VERSION SSH_PORTABLE
+-- 
+2.38.1
+

@@ -12,5 +12,6 @@ git checkout -b ses 2022.08.3
 
 rsync -a /workspace/config/board/ /buildroot/board/
 rsync -a /workspace/config/configs/ /buildroot/configs/
+rsync -a /workspace/config/package/ /buildroot/package/
 
 make ses_defconfig

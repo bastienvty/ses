@@ -1,0 +1,59 @@
+#!/bin/sh
+#
+# sshd        Starts sshd.
+#
+
+# Make sure the ssh-keygen progam exists
+[ -f /usr/bin/ssh-keygen ] || exit 0
+
+umask 077
+
+start() {
+	# Define the keys and bit lengths
+    KEYS_AND_BITS="rsa:4096 dsa:1024 ecdsa:521 ed25519:256"
+
+    # Create any missing keys
+    for KEY_PAIR in $KEYS_AND_BITS; do
+        KEY_TYPE=$(echo $KEY_PAIR | cut -d: -f1)
+        KEY_BITS=$(echo $KEY_PAIR | cut -d: -f2)
+        KEY="/etc/ssh/ssh_host_${KEY_TYPE}_key"
+        if [ -f "$KEY" ]; then
+            echo "$KEY already exists."
+        else 
+            ssh-keygen -q -N "" -t $KEY_TYPE -b $KEY_BITS -f $KEY
+        fi
+    done
+	echo "SSH keys: RSA 4096 bits, DSA 1024 bits, ecdsa 521 and ed25519 256 bits are all available."
+
+	printf "Starting sshd: "
+	/usr/sbin/sshd
+	touch /var/lock/sshd
+	echo "OK"
+}
+stop() {
+	printf "Stopping sshd: "
+	killall sshd
+	rm -f /var/lock/sshd
+	echo "OK"
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

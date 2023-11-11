@@ -1,0 +1,35 @@
+OpenSSH has been configured with the following options:
+                     User binaries: /usr/bin
+                   System binaries: /usr/sbin
+               Configuration files: /etc/ssh
+                   Askpass program: /usr/libexec/ssh-askpass
+                      Manual pages: /usr/share/man/manX
+                          PID file: /var/run
+  Privilege separation chroot path: /var/empty
+            sshd default user PATH: /bin:/sbin:/usr/bin:/usr/sbin
+                    Manpage format: doc
+                       PAM support: no
+                   OSF SIA support: no
+                 KerberosV support: no
+                   SELinux support: no
+                   libedit support: no
+                   libldns support: no
+  Solaris process contract support: no
+           Solaris project support: no
+         Solaris privilege support: no
+       IP address in $DISPLAY hack: no
+           Translate v4 in v6 hack: yes
+                  BSD Auth support: no
+              Random number source: OpenSSL internal ONLY
+             Privsep sandbox style: seccomp_filter
+                   PKCS#11 support: yes
+                  U2F/FIDO support: yes
+
+              Host: aarch64-buildroot-linux-uclibc
+          Compiler: /buildroot/output/host/bin/aarch64-buildroot-linux-uclibc-gcc
+    Compiler flags: -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -pipe -Wno-error=format-truncation -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wsizeof-pointer-memaccess -Wno-pointer-sign -Wno-unused-result -Wimplicit-fallthrough -Wmisleading-indentation -fno-strict-aliasing -D_FORTIFY_SOURCE=2 -ftrapv -fzero-call-used-regs=all -fno-builtin-memset -fPIE  
+Preprocessor flags: -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_XOPEN_SOURCE=600 -D_BSD_SOURCE -D_DEFAULT_SOURCE -D_GNU_SOURCE
+      Linker flags: -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -pie 
+         Libraries: -L/buildroot/output/host/bin/../aarch64-buildroot-linux-uclibc/sysroot/usr/lib -lssl -lcrypto 
+     +for channels: -lcrypto  -lz
+         +for sshd: -lcrypt

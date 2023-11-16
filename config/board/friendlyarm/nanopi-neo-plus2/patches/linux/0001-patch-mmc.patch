@@ -15,7 +15,7 @@ index a56fae761..ce2632635 100644
  #include <dt-bindings/thermal/thermal.h>
  
  / {
-+	aliasaes {
++	aliases {
 +		mmc0 = &mmc0;
 +		mmc1 = &mmc1;
 +		mmc2 = &mmc2;

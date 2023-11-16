@@ -12,6 +12,7 @@ mkimage -f $BUILDROOT_DIR/output/images/kernel_fdt.its -E $BUILDROOT_DIR/output/
 dd if=/dev/zero of=boot.ext4 bs=1024 count=65536
 mkfs.ext4 -L boot boot.ext4
 mount -o loop boot.ext4 /mnt
+
 cp -r $BUILDROOT_DIR/output/images/Image.itb $BUILDROOT_DIR/output/images/boot.scr /mnt/.
 umount /mnt
 mv boot.ext4 $BUILDROOT_DIR/output/images/.

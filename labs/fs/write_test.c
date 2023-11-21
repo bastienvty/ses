@@ -1,4 +1,4 @@
-//aarch64-linux-gnu-gcc -Wall -Wextra -o write_skeleton write_skeleton.c
+// /buildroot/output/host/usr/bin/aarch64-linux-gcc -Wall -Wextra -o write_test write_test.c
 
 #define _GNU_SOURCE
 #include <sched.h>

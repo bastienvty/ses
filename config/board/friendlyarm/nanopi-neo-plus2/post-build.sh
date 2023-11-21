@@ -16,14 +16,3 @@ mount -o loop boot.ext4 /mnt
 cp -r $BUILDROOT_DIR/output/images/Image.itb $BUILDROOT_DIR/output/images/boot.scr /mnt/.
 umount /mnt
 mv boot.ext4 $BUILDROOT_DIR/output/images/.
-
-dd if=/dev/zero of=dev.btrfs bs=1M count=400 # btrfs file of 400M
-apt install btrfs-progs -y
-mkfs.btrfs dev.btrfs
-btrfs filesystem label dev.btrfs dev_btrfs
-mv dev.btrfs $BUILDROOT_DIR/output/images/.
-
-dd if=/dev/zero of=dev.f2fs bs=1M count=400
-apt install f2fs-tools -y
-mkfs.f2fs -l dev_f2fs dev.f2fs
-mv dev.f2fs $BUILDROOT_DIR/output/images/.

@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Mount automatically partition 3 as LUKFS rootfs
+#
+
+case "$1" in
+  start|restart)
+    echo "Mounting LUKFS rootfs..."
+    cryptsetup --debug open --type luks --key-file /root/passphrase /dev/mmcblk0p3 usrfs1
+    [ $? = 0 ] && echo "Mapping OK" || echo "FAIL"
+    mkdir /mnt/lukfs /mnt/rootfs
+    mount /dev/mapper/usrfs1 /mnt/lukfs/
+    [ $? = 0 ] && echo "Mount LUKFS OK" || echo "FAIL"
+    mount -t ext4 /mnt/lukfs/rootfs.ext4 /mnt/rootfs/
+    [ $? = 0 ] && echo "Mount rootfs OK" || echo "FAIL"
+    ;;
+  stop)
+    # Nothing to do on stop
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -5,7 +5,6 @@ IMAGES_DIR=$BUILDROOT_DIR/output/images
 DEVICE=rootfs.lukfs
 
 cd $BOARD_DIR
-./initramfs.sh
 
 apt install cryptsetup -y
 dd if=/dev/urandom of=passphrase bs=64 count=1
@@ -25,11 +24,13 @@ cp -pr /mnt/rootfs/* /mnt/lukfs/
 umount $IMAGES_DIR/rootfs.ext4
 umount /dev/mapper/usrfs1
 cryptsetup close usrfs1
-rm /mnt/lukfs
-rm /mnt/rootfs
+rm -r /mnt/lukfs
+rm -r /mnt/rootfs
 
 mv rootfs.lukfs $IMAGES_DIR/.
-mv passphrase $BUILDROOT_DIR/output/target/root/.
+
+./initramfs.sh $BOARD_DIR/passphrase
+rm passphrase
 
 cd $IMAGES_DIR
 

@@ -6,6 +6,8 @@ DEVICE=rootfs.lukfs
 
 cd $BOARD_DIR
 
+apt update
+
 apt install cryptsetup -y
 dd if=/dev/urandom of=passphrase bs=64 count=1
 dd if=/dev/zero of=rootfs.lukfs bs=2147483648 count=1

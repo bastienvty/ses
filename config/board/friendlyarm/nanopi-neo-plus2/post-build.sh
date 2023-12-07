@@ -36,11 +36,7 @@ rm passphrase
 
 cd $IMAGES_DIR
 
-#install -m 0644 -D $BOARD_DIR/extlinux.conf $BINARIES_DIR/extlinux/extlinux.conf
 mkimage -C none -A arm64 -T script -d $BOARD_DIR/boot.cmd boot.scr
-
-#cp -v $BOARD_DIR/kernel_fdt.its .
-#mkimage -f kernel_fdt.its -E Image.itb
 
 dd if=/dev/zero of=boot.ext4 bs=1024 count=65536 # ext4 file of 64M
 mkfs.ext4 -L boot boot.ext4

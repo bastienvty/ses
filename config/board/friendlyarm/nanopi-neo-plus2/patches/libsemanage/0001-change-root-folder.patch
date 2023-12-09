@@ -1,0 +1,23 @@
+From 9b4a1ba92e22c842015322ce669f7904e6570664 Mon Sep 17 00:00:00 2001
+From: Bastien Veuthey <veutheybastien@gmail.com>
+Date: Sat, 9 Dec 2023 03:47:22 +0100
+Subject: [PATCH] change root folder
+
+---
+ src/semanage.conf | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/semanage.conf b/src/semanage.conf
+index dc8d46b..53feeb7 100644
+--- a/src/semanage.conf
++++ b/src/semanage.conf
+@@ -39,3 +39,5 @@ module-store = direct
+ # By default, semanage will generate policies for the SELinux target.
+ # To build policies for Xen, uncomment the following line.
+ #target-platform = xen
++
++store-root = /etc/selinux
+\ No newline at end of file
+-- 
+2.38.1
+

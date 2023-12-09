@@ -1,0 +1,65 @@
+policy_module(buildroot, 1.0.0)
+
+#============= chkpwd_t ==============
+allow chkpwd_t tmpfs_t:dir search;
+
+#============= getty_t ==============
+allow getty_t device_t:chr_file { getattr ioctl open read setattr write };
+allow getty_t getty_runtime_t:file watch;
+allow getty_t init_runtime_t:dir read;
+allow getty_t init_runtime_t:sock_file write;
+allow getty_t init_tmpfs_t:file { lock open read write };
+allow getty_t init_t:unix_stream_socket connectto;
+allow getty_t proc_t:filesystem getattr;
+allow getty_t sysctl_kernel_t:dir search;
+allow getty_t sysctl_kernel_t:file { open read };
+allow getty_t sysctl_t:dir search;
+allow getty_t tmpfs_t:dir search;
+allow getty_t var_t:lnk_file read;
+
+#============= local_login_t ==============
+allow local_login_t bin_t:file execute;
+allow local_login_t device_t:chr_file { ioctl open read relabelfrom relabelto write };
+allow local_login_t init_tmpfs_t:file { lock open read write };
+allow local_login_t proc_t:filesystem getattr;
+allow local_login_t var_log_t:file { create lock open read write };
+allow local_login_t var_run_t:dir { add_name write };
+allow local_login_t var_run_t:file { create lock open read write };
+
+#============= semanage_t ==============
+allow semanage_t tmpfs_t:dir search;
+
+#============= syslogd_t ==============
+allow syslogd_t device_t:chr_file { open read write };
+allow syslogd_t self:capability audit_control;
+allow syslogd_t self:netlink_audit_socket nlmsg_write;
+allow syslogd_t tmpfs_t:dir { add_name search write };
+allow syslogd_t tmpfs_t:file { append create getattr open };
+allow syslogd_t var_t:dir { add_name write };
+allow syslogd_t var_t:file { append create };
+allow syslogd_t var_t:lnk_file read;
+
+#============= sysadm_t ==============
+allow sysadm_t device_t:chr_file { ioctl open read write };
+allow sysadm_t kernel_t:fd use;
+allow sysadm_t kernel_t:system module_request;
+allow sysadm_t node_t:tcp_socket node_bind;
+allow sysadm_t self:capability { audit_control audit_write};
+allow sysadm_t self:netlink_audit_socket { nlmsg_read nlmsg_write };
+allow sysadm_t selinux_config_t:file watch;
+allow sysadm_t tmpfs_t:dir watch;
+allow sysadm_t unlabeled_t:file { execute map read };
+allow sysadm_t unlabeled_t:lnk_file read;
+allow sysadm_t var_t:dir watch;
+
+#============= klogd_t ==============
+allow klogd_t device_t:chr_file { read write };
+allow klogd_t selinux_config_t:dir search;
+
+#============= ifconfig_t ==============
+allow ifconfig_t device_t:chr_file { getattr ioctl read write };
+allow ifconfig_t proc_t:filesystem getattr;
+allow ifconfig_t root_t:chr_file { read write };
+
+#============= kernel_t ==============
+allow kernel_t sysadm_t:process transition;

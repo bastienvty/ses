@@ -45,11 +45,14 @@ RUN apt update && export DEBIAN_FRONTEND=noninteractive && yes | unminimize && a
     bzip2 \
     tree \
     bc   \
-    ruby
+    ruby \
+    vim \
+    tpm2-tools
 
 COPY scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*
 
+### RUN export TPM2TOOLS_TCTI="swtpm:host=HOST_IP_ADDRESS"
 
 ### RUN chmod +s /usr/bin/minicom
 

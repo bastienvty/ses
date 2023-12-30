@@ -42,6 +42,9 @@ PermitRootLogin yes # allow root login
 # but this is overridden so installations will only check .ssh/authorized_keys
 AuthorizedKeysFile	.ssh/authorized_keys
 
+PubkeyAcceptedKeyTypes +ssh-dss     
+HostKeyAlgorithms +ssh-dss
+
 #AuthorizedPrincipalsFile none
 
 #AuthorizedKeysCommand none

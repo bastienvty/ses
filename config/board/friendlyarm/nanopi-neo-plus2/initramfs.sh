@@ -103,12 +103,11 @@ mount -t proc none /proc
 mount -t sysfs none /sys
 mount -n -t devtmpfs devtmpfs /dev
 
-cryptsetup --debug open --type luks --key-file /root/passphrase /dev/mmcblk0p3 usrfs1
+cryptsetup --debug open --type luks --key-file /root/passphrase /dev/mmcblk0p2 usrfs1
 mount /dev/mapper/usrfs1 /newroot
 mount -n -t devtmpfs devtmpfs /newroot/dev
 
-#exec sh
-exec switch_root /newroot /sbin/init 
+exec switch_root /newroot /sbin/init
 endofinput
 ######
 chmod 755 init
